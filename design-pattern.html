@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Design Pattern</title>
+<!-- 2016-06-22 Wed 17:35 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="wuyunge" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Design Pattern</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 设计模式分类</a>
+<ul>
+<li><a href="#sec-1-1">1.1. 创建型模式</a></li>
+<li><a href="#sec-1-2">1.2. 结构性模式</a></li>
+<li><a href="#sec-1-3">1.3. 行为型模式</a></li>
+<li><a href="#sec-1-4">1.4. 并发型模式</a></li>
+<li><a href="#sec-1-5">1.5. 线程池模式</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. 设计模式的六大原则</a>
+<ul>
+<li><a href="#sec-2-1">2.1. 单一职责原则(single responsbility)</a></li>
+<li><a href="#sec-2-2">2.2. 里氏替换原则(Liskov Substitution Principle)</a></li>
+<li><a href="#sec-2-3">2.3. 依赖倒转原则(Dependence Inversion Principle)</a></li>
+<li><a href="#sec-2-4">2.4. 接口隔离原则(Interface Segregation Principle)</a></li>
+<li><a href="#sec-2-5">2.5. 迪米特(最少知道)法则(Demeter Principle)</a></li>
+<li><a href="#sec-2-6">2.6. 合成复用原则(Composite Reuse Principle)</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. 23种设计模式</a>
+<ul>
+<li><a href="#sec-3-1">3.1. 创建模式</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1. 简单工厂模式</a></li>
+<li><a href="#sec-3-1-2">3.1.2. 工厂方法模式(Factory Method)</a></li>
+<li><a href="#sec-3-1-3">3.1.3. 抽象工厂模式(Abstract Factory)</a></li>
+<li><a href="#sec-3-1-4">3.1.4. 单例模式(Singleton)</a></li>
+<li><a href="#sec-3-1-5">3.1.5. 建造者模式(Builder)</a></li>
+<li><a href="#sec-3-1-6">3.1.6. 原型模式(Prototype)</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-2">3.2. 结构模式</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. 适配器模式(Adapter)</a></li>
+<li><a href="#sec-3-2-2">3.2.2. 装饰模式(Decorator)</a></li>
+<li><a href="#sec-3-2-3">3.2.3. 代理模式(Proxy)</a></li>
+<li><a href="#sec-3-2-4">3.2.4. 外观模式(Facade)</a></li>
+<li><a href="#sec-3-2-5">3.2.5. 桥接模式(Bridge)</a></li>
+<li><a href="#sec-3-2-6">3.2.6. 组合模式(Composite)</a></li>
+<li><a href="#sec-3-2-7">3.2.7. 享元模式(Flyweight)</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. 关系模式（行为型模式）</a>
+<ul>
+<li><a href="#sec-3-3-1">3.3.1. 父类与子类</a></li>
+<li><a href="#sec-3-3-2">3.3.2. 两个类之间</a></li>
+<li><a href="#sec-3-3-3">3.3.3. 类的状态</a></li>
+<li><a href="#sec-3-3-4">3.3.4. 通过中间类</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 设计模式分类</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 创建型模式</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>工厂方法模式
+</li>
+<li>抽象工厂模式
+</li>
+<li>单例模式
+</li>
+<li>建造者模式
+</li>
+<li>原型模式
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> 结构性模式</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>适配器模式
+</li>
+<li>装饰器模式
+</li>
+<li>代理模式
+</li>
+<li>外观模式
+</li>
+<li>桥接模式
+</li>
+<li>组合模式
+</li>
+<li>享元模式
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> 行为型模式</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>策略模式
+</li>
+<li>模版方法模式
+</li>
+<li>观察者模式
+</li>
+<li>迭代子模式
+</li>
+<li>责任连模式
+</li>
+<li>命令模式
+</li>
+<li>备忘录模式
+</li>
+<li>状态模式
+</li>
+<li>访问者模式
+</li>
+<li>中介模式
+</li>
+<li>解释器模式
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> 并发型模式</h3>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> 线程池模式</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 设计模式的六大原则</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 单一职责原则(single responsbility)</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>一个类，一个函数，一个模块，一个功能块一次只做一件事情
+</li>
+<li>好处是便于维护，和测试。状态的叠加产生的状态数是一个指数函数。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> 里氏替换原则(Liskov Substitution Principle)</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>定义： 里氏代换原则是对实现抽象化的具体步骤的规范
+</li>
+<li>若不存在扩展继承，便不会存在替换问题。
+</li>
+<li>若存在扩展继承，子类应尽量不要重写和重载父类方法
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> 依赖倒转原则(Dependence Inversion Principle)</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>面向接口编程，依赖抽象而非具体实现。
+</li>
+<li>没什么好说的，尽量使用实现继承。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> 接口隔离原则(Interface Segregation Principle)</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>定义：每个接口不存在子类用不到却必须实现的方法。如果存在，应该将接口拆分为多个接口。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> 迪米特(最少知道)法则(Demeter Principle)</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li>定义A：一个类，模块，功能块，对自己依赖的类知道得越少越好。也就是说无论被依赖的类多么复杂，
+都应该将实现封装在内部。
+</li>
+<li>定义B：只与直接的朋友通信。类之间只要有耦合关系，就叫朋友关系。耦合分为依赖、关联、聚合、组合。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> 合成复用原则(Composite Reuse Principle)</h3>
+<div class="outline-text-3" id="text-2-6">
+<ul class="org-ul">
+<li>尽量使用组合／聚合，而不是使用继承。
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 23种设计模式</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 创建模式</h3>
+<div class="outline-text-3" id="text-3-1">
+</div><div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> 简单工厂模式</h4>
+<div class="outline-text-4" id="text-3-1-1">
+</div><ol class="org-ol"><li><a id="sec-3-1-1-1" name="sec-3-1-1-1"></a>普通工厂<br  /><div class="outline-text-5" id="text-3-1-1-1">
+<ul class="org-ul">
+<li>工厂类有一个可以生产一系列具有一定约束的对象的方法
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-3-1-1-2" name="sec-3-1-1-2"></a>多个方法<br  /><div class="outline-text-5" id="text-3-1-1-2">
+<ul class="org-ul">
+<li>两个工厂的工厂方法放到一个类里就是多方法工厂
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-3-1-1-3" name="sec-3-1-1-3"></a>多个静态方法<br  /><div class="outline-text-5" id="text-3-1-1-3">
+<ul class="org-ul">
+<li>实例方法变为静态方法
+</li>
+</ul>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> 工厂方法模式(Factory Method)</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<ul class="org-ul">
+<li>简单工厂类的创建依赖工厂类，当拓展程序时，必须对工厂类进行修改。
+</li>
+<li>利用一个工厂接口和一个产品接口，将程序改变时的修改从工厂类转变为实现类的增加。
+</li>
+<li>原先的基于if else的类型判断分发对象 变为 语言本身内建的基于入参类型的multi dispatch。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> 抽象工厂模式(Abstract Factory)</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<ul class="org-ul">
+<li>工厂方法模式
+<ul class="org-ul">
+<li>一个抽象产品类，多个具体产品类
+</li>
+<li>一个抽象工厂类，多个具体工厂类
+</li>
+</ul>
+</li>
+<li>抽象工厂模式
+<ul class="org-ul">
+<li>多个抽象产品类，每个抽象产品类有多个具体产品类
+</li>
+<li>一个抽象工厂类，多个具体工厂类
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-1-4" class="outline-4">
+<h4 id="sec-3-1-4"><span class="section-number-4">3.1.4</span> 单例模式(Singleton)</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<ul class="org-ul">
+<li>定义: 保证在一个系统中，只存在有限个对象。
+</li>
+<li>好处
+<ul class="org-ul">
+<li>降低频繁创建的类产生的开销，以及gc压力
+</li>
+<li>系统的约束中只存在有限个对象
+</li>
+</ul>
+</li>
+<li>线程安全问题
+<ul class="org-ul">
+<li>在多线程环境下，对产生单例对象的方法加锁。
+</li>
+<li>优化，将加锁时机从get对象时延迟到新建对象时。但在JVM优化的情况下，赋值和实例化是分两步进行，还可能会出现错误。
+</li>
+<li>利用JVM加载类时线程互斥的机制，利用内部类实现。
+</li>
+<li>继续优化，将判断与新建类拆分开。并对新建类的方法加锁。
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-1-5" class="outline-4">
+<h4 id="sec-3-1-5"><span class="section-number-4">3.1.5</span> 建造者模式(Builder)</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<ul class="org-ul">
+<li>采用内部类是我见过比较优雅的方式了，lombok就是这么做的。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-1-6" class="outline-4">
+<h4 id="sec-3-1-6"><span class="section-number-4">3.1.6</span> 原型模式(Prototype)</h4>
+<div class="outline-text-4" id="text-3-1-6">
+<ul class="org-ul">
+<li>说明: 原型模式虽然是创建型模式，但是与工程模式没有关系，该模式的思想是将一个对象作为原型，
+对其进行复制、克隆，产生一个和原对象类似的新对象。
+</li>
+<li>深复制: 将对象的二进制输入以流的形式读入，再写出二进制数据对应的对象.
+<ul class="org-ul">
+<li>ObjectOutputStream&lt;ByteArrayOutputStream&gt;.write(Object) -&gt; ()
+</li>
+<li>ObjectInputStream&lt;ByteArrayOutputStream&lt;ByteArray&gt;&gt;.readObject() -&gt; Object
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> 结构模式</h3>
+<div class="outline-text-3" id="text-3-2">
+</div><div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> 适配器模式(Adapter)</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<ul class="org-ul">
+<li>将某个接口转换成另外一个接口表示。
+</li>
+</ul>
+</div>
+<ol class="org-ol"><li><a id="sec-3-2-1-1" name="sec-3-2-1-1"></a>类的适配器模式<br  /><div class="outline-text-5" id="text-3-2-1-1">
+<ul class="org-ul">
+<li>核心思想: Source类，拥有一个待适配的方法A，目标接口Targetable，
+通过Adapter类，将Source的功能扩展到Targetable里——继承Source，实现Targetable。
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-3-2-1-2" name="sec-3-2-1-2"></a>对象的适配器模式<br  /><div class="outline-text-5" id="text-3-2-1-2">
+<ul class="org-ul">
+<li>思路: Adapter类，不继承Source，而是持有Source类的实例，以解决兼容性.
+</li>
+<li>class Wrapper&lt;Source&gt; implements Targetable {}
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-3-2-1-3" name="sec-3-2-1-3"></a>接口的适配器模式<br  /><div class="outline-text-5" id="text-3-2-1-3">
+<ul class="org-ul">
+<li>思路: 借助一个抽象类，实现该接口的所有方法，然后借助一个类，继承该抽象类，重写我们需要的方法。
+</li>
+</ul>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> 装饰模式(Decorator)</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<ul class="org-ul">
+<li>说明: 动态的给一个对象增加一些新的功能，要求装饰对象和被装饰对象实现同一个接口，装饰对象持有被装饰对象的实例。
+</li>
+<li>Decorator持有原对象的实例，重新实现需要装饰的方法。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> 代理模式(Proxy)</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<ul class="org-ul">
+<li>说明：用代理类转发请求。代理类对原对象产生的结果再做一些处理。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-2-4" class="outline-4">
+<h4 id="sec-3-2-4"><span class="section-number-4">3.2.4</span> 外观模式(Facade)</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<ul class="org-ul">
+<li>不用多说，就是将多个依赖集中到一起，再一起暴露出去。
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-2-5" class="outline-4">
+<h4 id="sec-3-2-5"><span class="section-number-4">3.2.5</span> 桥接模式(Bridge)</h4>
+<div class="outline-text-4" id="text-3-2-5">
+<ul class="org-ul">
+<li>说明： 把事物和具体实现分开，使他们可以各自独立的变化。
+用意是将抽象化和实现化解耦，使二者可以独立变化。
+</li>
+<li>利用一个接口，将具体的关注点隔离出去。
+</li>
+<li>例子: Client &#x2013;&gt; DriverManager &#x2013;&gt; Driver(MySqlDiver | OracleDriver | DB2Driver)
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-2-6" class="outline-4">
+<h4 id="sec-3-2-6"><span class="section-number-4">3.2.6</span> 组合模式(Composite)</h4>
+<div class="outline-text-4" id="text-3-2-6">
+<ul class="org-ul">
+<li>说明: 又叫部分-整体模式
+</li>
+<li>使用场景: 将多个对象组合在一起进行操作，常用于表示树形结构，如二叉树，数等
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3-2-7" class="outline-4">
+<h4 id="sec-3-2-7"><span class="section-number-4">3.2.7</span> 享元模式(Flyweight)</h4>
+<div class="outline-text-4" id="text-3-2-7">
+<ul class="org-ul">
+<li>说明： 主要目的是实现对象的共享，即共享池。当系统对象多的时候可以减少内存开销。通常与工厂模式一起使用。
+</li>
+<li>将公共属性抽离到一定范围内的公共区域。
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> 关系模式（行为型模式）</h3>
+<div class="outline-text-3" id="text-3-3">
+</div><div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> 父类与子类</h4>
+<div class="outline-text-4" id="text-3-3-1">
+</div><ol class="org-ol"><li><a id="sec-3-3-1-1" name="sec-3-3-1-1"></a>策略模式(Strategy)<br  /><div class="outline-text-5" id="text-3-3-1-1">
+<ul class="org-ul">
+<li>说明: 策略模式定义了一系列算法，并将每个算法封装起来，使他们可以相互替换。
+</li>
+<li>每个策略类相当于一个匿名函数.
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-3-3-1-2" name="sec-3-3-1-2"></a>模板方法模式(Tempalate Method)<br  /><div class="outline-text-5" id="text-3-3-1-2">
+<ul class="org-ul">
+<li>说明: 一个抽象类，有一个主方法，再定义n个小方法，可以是抽象也可以是具体的，
+在主方法内组合各个小方法的调用顺序
+</li>
+</ul>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> 两个类之间</h4>
+<div class="outline-text-4" id="text-3-3-2">
+</div><ol class="org-ol"><li><a id="sec-3-3-2-1" name="sec-3-3-2-1"></a>观察者模式<br  /><div class="outline-text-5" id="text-3-3-2-1">
+<ul class="org-ul">
+<li>将响应者(观察者)的一部分控制权交给变化源(被观察者)
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-3-3-2-2" name="sec-3-3-2-2"></a>迭代子模式<br  /><div class="outline-text-5" id="text-3-3-2-2">
+<ul class="org-ul">
+<li>提供一个接口Iterator，方便的进行迭代
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #859900;">interface</span> <span style="color: #268bd2;">Iterator</span> {
+   <span style="color: #268bd2;">Object</span> <span style="color: #b58900;">next</span>();
+   <span style="color: #268bd2;">boolean</span> <span style="color: #b58900;">hasNext</span>();
+}
+</pre>
+</div>
+</li>
+<li>当前状态在next()中修改
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-3-3-2-3" name="sec-3-3-2-3"></a>责任链模式<br  /></li>
+<li><a id="sec-3-3-2-4" name="sec-3-3-2-4"></a>命令模式<br  /></li></ol>
+</div>
+<div id="outline-container-sec-3-3-3" class="outline-4">
+<h4 id="sec-3-3-3"><span class="section-number-4">3.3.3</span> 类的状态</h4>
+<div class="outline-text-4" id="text-3-3-3">
+</div><ol class="org-ol"><li><a id="sec-3-3-3-1" name="sec-3-3-3-1"></a>备忘录模式<br  /></li>
+<li><a id="sec-3-3-3-2" name="sec-3-3-3-2"></a>状态模式<br  /></li></ol>
+</div>
+<div id="outline-container-sec-3-3-4" class="outline-4">
+<h4 id="sec-3-3-4"><span class="section-number-4">3.3.4</span> 通过中间类</h4>
+<div class="outline-text-4" id="text-3-3-4">
+</div><ol class="org-ol"><li><a id="sec-3-3-4-1" name="sec-3-3-4-1"></a>访问者模式<br  /></li>
+<li><a id="sec-3-3-4-2" name="sec-3-3-4-2"></a>中介者模式<br  /></li>
+<li><a id="sec-3-3-4-3" name="sec-3-3-4-3"></a>解释器模式<br  /></li></ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: wuyunge</p>
+<p class="date">Created: 2016-06-22 Wed 17:35</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>
